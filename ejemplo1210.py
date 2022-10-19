@@ -11,6 +11,7 @@ class Vehiculo:
     distancia=0
     def acelerar(self):
         self.__velocidad += 10 #velodcidad = velocidad + 10
+        carretera.ejex -= 20
         self.avanzar()
     def frenar(self):
         self.__velocidad -= 10 #velodcidad = velocidad + 10
@@ -22,8 +23,8 @@ class Vehiculo:
     def avanzar(self):
         self.latitud += (self.__velocidad/5 + 10) 
     def retroceder(self):
-        self.latitud -= (self.__velocidad/5 - 10) 
-    def __init__(self, velocidad=0, marca="",latitud=0, longitud=0) -> None:
+        self.latitud -= (self.__velocidad/5 + 10) 
+    def __init__(self, velocidad=0, marca="",latitud=0, longitud=300) -> None:
         self.__velocidad = velocidad
         self.latitud = latitud
         self.longitud = longitud
@@ -31,12 +32,17 @@ class Vehiculo:
         pass
 class Camion(Vehiculo):
         pass
+class Carretera:
+    ejex = 0
+    ejey = 0
 camion = Camion(50,"Volvo")
 camion.getVelocidad()
 objeto = Vehiculo(100,"Mazda")
+carretera = Carretera()
 pygame.init()
 ventana = pygame.display.set_mode((800,600))
 autito = pygame.image.load('./autito.png').convert_alpha()
+imgcarretera = pygame.image.load('./carretera.png').convert_alpha()
 #objeto.__velocidad = 1000
 #objeto.setVelocidad(123)
 print(objeto.getVelocidad())
@@ -46,8 +52,16 @@ while(True):
             objeto.acelerar() 
         if(event.type == pygame.KEYDOWN and event.key == pygame.K_s):
             objeto.frenar()
+        pygame.display.update()
+    ventana.fill((255,255,255))
+    carretera.ejex -= objeto.getVelocidad()/1000
+    if(carretera.ejex<-200):
+        carretera.ejex=0
+    if(objeto.latitud>600):
+        objeto.latitud = 400
+    ventana.blit(imgcarretera,(carretera.ejex,carretera.ejey)) 
+    ventana.blit(autito,(objeto.latitud,objeto.longitud)) 
     pygame.display.update()
-    ventana.blit(autito,(objeto.latitud,100)) 
     print(f'El vehículo va a {objeto.getVelocidad()}')
 
 
