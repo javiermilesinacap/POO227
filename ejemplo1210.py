@@ -20,16 +20,19 @@ class Vehiculo:
     def getVelocidad(self) -> int:
         return self.__velocidad
     def avanzar(self):
-        self.latitud += (self.__velocidad + 10) 
+        self.latitud += (self.__velocidad/5 + 10) 
     def retroceder(self):
-        self.latitud += (self.__velocidad - 10) 
+        self.latitud -= (self.__velocidad/5 - 10) 
     def __init__(self, velocidad=0, marca="",latitud=0, longitud=0) -> None:
         self.__velocidad = velocidad
         self.latitud = latitud
         self.longitud = longitud
         self.marca = marca
         pass
-
+class Camion(Vehiculo):
+        pass
+camion = Camion(50,"Volvo")
+camion.getVelocidad()
 objeto = Vehiculo(100,"Mazda")
 pygame.init()
 ventana = pygame.display.set_mode((800,600))
@@ -43,8 +46,8 @@ while(True):
             objeto.acelerar() 
         if(event.type == pygame.KEYDOWN and event.key == pygame.K_s):
             objeto.frenar()
-        ventana.blit(autito,(objeto.latitud,100)) 
-        pygame.display.update()
+    pygame.display.update()
+    ventana.blit(autito,(objeto.latitud,100)) 
     print(f'El vehículo va a {objeto.getVelocidad()}')
 
 
