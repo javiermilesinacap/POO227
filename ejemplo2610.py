@@ -1,5 +1,5 @@
 import abc
-class Vehiculo(abc):
+class Vehiculo(abc.ABC):
     def __init__(self):
         self.ruedas=0
         self.__color=(255,0,0)
@@ -19,6 +19,6 @@ class Anfibio(Vehiculo):
 class Terrestre(Vehiculo):
     pass
 vehiculo = Aereo(motor="Reaccion")
-vehiculoA = Vehiculo()
+#vehiculoA = Vehiculo()
 #vehiculo.__color="Blanco"
 print(vehiculo.getColor())
