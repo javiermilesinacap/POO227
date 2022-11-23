@@ -1,6 +1,7 @@
 import tkinter
 def Aceptar():
-    print("Hola Mundo")
+    global caja
+    print("Hola Mundo: "+str(caja.get()))
 Ventana = tkinter.Tk()
 Ventana.title("Ejemplo de botones")
 Ventana.geometry("300x200")
